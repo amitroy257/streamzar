@@ -1,0 +1,47 @@
+{
+  "name": "streamzar",
+  "productName": "Streamzar",
+  "version": "1.0.0",
+  "description": "Streamzar - a free, open streaming studio. Multistream to YouTube, Facebook, Twitch and more with scenes, sources, alerts, chat and high-quality FFmpeg encoding.",
+  "author": "Streamzar",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "start": "electron .",
+    "typecheck": "tsc -p tsconfig.node.json --noEmit && tsc -p tsconfig.web.json --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:e2e": "node test/e2e/run.mjs",
+    "check": "npm run typecheck && npm test && npm run build",
+    "dist": "npm run build && electron-builder --publish never",
+    "dist:win": "npm run build && electron-builder --win --publish never",
+    "dist:mac": "npm run build && electron-builder --mac --publish never",
+    "dist:linux": "npm run build && electron-builder --linux --publish never",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "ffmpeg-static": "5.3.0",
+    "ws": "8.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/ws": "8.18.1",
+    "@vitejs/plugin-react": "5.1.1",
+    "electron": "45.2.2",
+    "electron-builder": "26.18.0",
+    "esbuild": "0.25.12",
+    "lucide-react": "0.548.0",
+    "playwright-core": "1.56.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "typescript": "5.9.3",
+    "vite": "7.3.7",
+    "vitest": "3.2.4",
+    "zustand": "5.0.8"
+  }
+}

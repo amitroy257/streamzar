@@ -1,0 +1,45 @@
+appId: app.streamzar.studio
+productName: Streamzar
+copyright: Copyright © 2026 Streamzar contributors
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**/*
+  - "!dist/**/*.map"
+  - build/icon.png
+  - package.json
+# FFmpeg is an executable: it must live outside the asar archive to be spawned.
+asarUnpack:
+  - node_modules/ffmpeg-static/**
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: build/icon.ico
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  shortcutName: Streamzar
+mac:
+  target:
+    - target: dmg
+  category: public.app-category.video
+  icon: build/icon.png
+  hardenedRuntime: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    NSCameraUsageDescription: Streamzar uses your camera as a video source in your scenes.
+    NSMicrophoneUsageDescription: Streamzar uses your microphone as an audio source in your scenes.
+    NSAudioCaptureUsageDescription: Streamzar captures your system audio as the Desktop Audio source.
+linux:
+  target:
+    - AppImage
+    - deb
+  category: AudioVideo
+  icon: build/icon.png
+  maintainer: Streamzar contributors
+  synopsis: Live streaming studio for YouTube, Facebook, Twitch and more
